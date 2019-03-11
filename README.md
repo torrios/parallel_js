@@ -4,7 +4,7 @@
 
 * install Golang
 * clone repo
-* execute ```go run main.go``` in a terminal from a root directory
+* execute ```go run main.go``` in a terminal from the root repo directory
 * navigate to http://localhost:8080
 * Voila
 
