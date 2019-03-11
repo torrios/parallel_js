@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <div id="main"></div>
+        Number of parallel requests: <input type="text" size="5" id="number" value="8"> Delay (seconds): <input type="text" size="8" id="delay" value="2"> <button id="button">Go!</button> <button id="clear">Clear...</button>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript">
+        (function () {
+            var $main = $('#main');
+            $('#button').click(function () {
+                var number = $('#number').val(),
+                    delay = $('#delay').val();
+                for (var i = 0; i < number; i++) {
+                    var start = (new Date()).getTime();
+                    $.ajax({
+                        url: '/testit',
+                        method: 'POST',
+                        data: {'ajax': 1, 'delay': delay},
+                        async: true,                        
+                        success: function (data) {
+                            var end = (new Date()).getTime(),
+                                elapsed = end - start;
+                            $main.append('<div>' + data + '  - Elapsed time is: ' + elapsed + ' ms</div>');
+                        }
+                    });
+                }
+            });
+            $('#clear').click(function () {
+                $main.html('');
+            });
+        })();
+        </script>
+</body>
+</html>
